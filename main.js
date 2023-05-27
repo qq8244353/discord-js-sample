@@ -49,8 +49,8 @@ client.on('messageCreate', async (message) => {
         return
     }
     //メッセージにリアクションを追加する.
-    const Emoji = emojis[Math.floor(Math.random() * emojis.length)]
-    message.react(aEmoji)
+    const emoji = emojis[Math.floor(Math.random() * emojis.length)]
+    message.react(emoji)
     return
 })
 

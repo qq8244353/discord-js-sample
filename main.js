@@ -42,8 +42,7 @@ client.on('messageCreate', async (message) => {
         const title = onix.DescriptiveDetail.TitleDetail.TitleElement.TitleText.content
         const price = onix.ProductSupply.SupplyDetail.Price[0].PriceAmount
         const currency = onix.ProductSupply.SupplyDetail.Price[0].CurrencyCode
-        sendReply(
-            message,
+        message.reply(
             'タイトル: ' + title + '\n価格: ' + price + ' ' + currency + '\nであっていますか？'
         )
         return
@@ -66,7 +65,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
     const member = await guild.members.fetch(user.id)
     const role = await guild.roles.fetch().then((roles) => {
         return roles.find((role) => {
-            if (role.name === content) return role
+            if (role.name === message.content) return role
         })
     })
     member.roles.add(role)

@@ -31,21 +31,10 @@ client.on('messageCreate', async (message) => {
         return
     }
     //チャンネルによって挙動を帰る.
-    if (message.channelId === process.env.BOOK_CHANNEL_ID) {
-        //外部のAPIを利用する.
-        const response = await axios.get('https://api.openbd.jp/v1/get?isbn=' + message.content)
-        if (response.data[0] === null) {
-            sendReply(message, '本が見つかりませんでした:cry:')
-            return
-        }
-        const onix = response.data[0].onix
-        const title = onix.DescriptiveDetail.TitleDetail.TitleElement.TitleText.content
-        const price = onix.ProductSupply.SupplyDetail.Price[0].PriceAmount
-        const currency = onix.ProductSupply.SupplyDetail.Price[0].CurrencyCode
-        message.reply(
-            'タイトル: ' + title + '\n価格: ' + price + ' ' + currency + '\nであっていますか？'
-        )
-        return
+    if (message.channelId === process.env.CHANNEL_ID) {
+        message.reply('指定されたチャンネルです！')
+    } else {
+        message.reply('それ以外のチャンネルです！')
     }
     //メッセージにリアクションを追加する.
     const emoji = emojis[Math.floor(Math.random() * emojis.length)]
